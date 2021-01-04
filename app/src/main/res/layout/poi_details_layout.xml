@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_main">
+
+    <data>
+        <variable name="viewmodel" type="com.yasincidemcarto.androidtest.ui.MainViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:id="@+id/poi_details"
+        app:layout_insetEdge="bottom"
+        app:behavior_peekHeight="100dp"
+        app:behavior_hideable="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        style="@style/CustomBottomSheet">
+
+        <TextView
+            android:id="@+id/poi_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@{viewmodel.selectedPoint.title}"
+            app:layout_constraintEnd_toEndOf="@+id/poi_description"
+            app:layout_constraintStart_toStartOf="@+id/poi_description"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Sydney Harbour Bridge" />
+
+        <TextView
+            android:id="@+id/poi_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/grey"
+            android:textSize="14sp"
+            android:text="@{viewmodel.selectedPoint.description}"
+            app:layout_constraintEnd_toStartOf="@+id/shimmerFrameLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/poi_title"
+            tools:text="Sydney Harbour Bridge deck looking south towards the Sydney CBD." />
+
+        <TextView
+            android:id="@+id/poi_region"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/grey"
+            android:textSize="13sp"
+            android:text="@{viewmodel.selectedPoint.region}"
+            app:layout_constraintBottom_toTopOf="@+id/directions"
+            app:layout_constraintEnd_toEndOf="@+id/poi_description"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/poi_description"
+            app:layout_constraintTop_toBottomOf="@+id/poi_description"
+            tools:text="SYD_MET" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/shimmerFrameLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/map_toolbar_background"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/poi_region"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/poi_title">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp">
+
+                <include layout="@layout/shimmer_image_placeholder" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <ImageView
+                android:id="@+id/poi_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                app:src_bind="@{viewmodel.selectedPoint.imageFixed}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/directions"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/directions"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:iconTint="@color/white"
+            app:icon="@drawable/ic_direction"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/poi_region" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
