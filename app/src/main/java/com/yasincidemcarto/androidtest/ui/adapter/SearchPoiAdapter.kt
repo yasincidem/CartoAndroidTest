@@ -1,11 +1,13 @@
-package com.carto.androidtest
+package com.yasincidemcarto.androidtest.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.carto.androidtest.databinding.ItemSearchPoiBinding
+import com.yasincidemcarto.androidtest.R
+import com.yasincidemcarto.androidtest.databinding.ItemSearchPoiBinding
+import com.yasincidemcarto.androidtest.datasource.model.Poi
 import java.util.*
 
 class SearchPoiAdapter(
